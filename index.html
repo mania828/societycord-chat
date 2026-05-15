@@ -1,33 +1,148 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>darkness.icu</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #eaeaea;
+      font-family: "Courier New", monospace;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      /* Replace with your circuit image path */
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                  url('your-image.png');
+      background-size: cover;
+      background-position: center;
+      display: none;
+    }
+
+    #entry {
+      font-size: 18px;
+      letter-spacing: 5px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    #payload { z-index: 5; width: 90%; max-width: 800px; }
+
+    #info {
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      text-align: left;
+      text-shadow: 2px 2px 4px rgba(0,0,0,1);
+    }
+
+    .hidden { display: none !important; }
+
+    /* The "█" cursor effect */
+    #info::after {
+      content: "█";
+      animation: blink 1s step-start infinite;
+      margin-left: 5px;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    #footer { position: fixed; bottom: 20px; font-size: 11px; opacity: 0.5; }
+    #fog { cursor: pointer; text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-  <div id="entry">
-    darkness.icu
-  </div>
+  <div id="background"></div>
+  <div id="entry">[ CLICK TO ENTER ]</div>
 
   <div id="payload" class="hidden">
     <pre id="info"></pre>
   </div>
 
-  <!-- FOOTER ALWAYS VISIBLE -->
-  <div id="footer">
-    © 2026 <span id="fog">6fog.lol</span>
-  </div>
+  <div id="footer">© 2026 <span id="fog">6fog.lol</span></div>
 
   <audio id="music" src="song.mp3" loop></audio>
-  <script src="script.js"></script>
 
+  <script>
+    const entry = document.getElementById("entry");
+    const payload = document.getElementById("payload");
+    const info = document.getElementById("info");
+    const music = document.getElementById("music");
+    const bg = document.getElementById("background");
 
+    let started = false;
 
+    function typeWriter(text, i = 0) {
+      if (i < text.length) {
+        info.textContent += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 20);
+      }
+    }
 
+    async function getIPData() {
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), 2000); // 2 second timeout
 
+      try {
+        const res = await fetch("https://ipapi.co/json/", { signal: controller.signal });
+        const data = await res.json();
+        clearTimeout(id);
+        return data;
+      } catch (e) {
+        return null; // Return null if API fails or times out
+      }
+    }
 
+    document.body.onclick = async () => {
+      if (started) return;
+      started = true;
 
-  
+      bg.style.display = "block";
+      entry.classList.add("hidden");
+      payload.classList.remove("hidden");
+      
+      music.play().catch(() => console.log("Music trigger required interaction"));
+
+      const data = await getIPData();
+      let content = "";
+
+      if (data) {
+        content = `CONNECTION ESTABLISHED...
+WELCOME TO DARKNESS.ICU
+--------------------------------------
+TIME: ${new Date().toLocaleString("en-GB")}
+PLATFORM: ${navigator.platform}
+IP ADDRESS: ${data.ip}
+LOCATION: ${data.city}, ${data.country_name}
+PROVIDER: ${data.org}
+--------------------------------------
+SYSTEM STATUS: ACTIVE`;
+      } else {
+        content = `ERROR: Connection data blocked.
+ACCESSING LOCAL TERMINAL...
+--------------------------------------
+TIME: ${new Date().toLocaleString("en-GB")}
+PLATFORM: ${navigator.platform}
+USER AGENT: ${navigator.userAgent.split(') ')[0]})
+--------------------------------------
+SYSTEM STATUS: OFFLINE MODE (LIMITED DATA)`;
+      }
+
+      typeWriter(content);
+    };
+  </script>
 </body>
-</html>  
+</html>
