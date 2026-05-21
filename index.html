@@ -1,192 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>darkness.icu</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #000;
-      color: #eaeaea;
-      font-family: "Courier New", monospace;
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    /* BACKGROUND LAYER */
-    #background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      /* Add your background image path here */
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                  url('https://cdn.discordapp.com/attachments/1504656413740240986/1504876760737648811/ssstik.io_1778858412639.mp4?ex=6a089533&is=6a0743b3&hm=3d2097713a85d60cec38fb66112cc5ce42e468dd9619d08db18db03bbf59bc69&');
-      background-size: cover;
-      background-position: center;
-      display: none;
-    }
-
-    /* ENTRY - EXACTLY FROM lol.html */
-    #entry {
-      font-size: 18px;
-      letter-spacing: 2px;
-      cursor: pointer;
-      opacity: 0.85;
-      z-index: 10;
-    }
-
-    /* PAYLOAD - CENTERED ALIGNMENT */
-    #payload {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      z-index: 5;
-    }
-
-    #info {
-      font-size: 13px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      display: inline-block;
-      text-align: left; /* Keeps the terminal look aligned left while the block is centered */
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* TYPEWRITER CURSOR */
-    #info::after {
-      content: "█";
-      animation: blink 1s step-start infinite;
-      margin-left: 5px;
-    }
-
-    @keyframes blink { 50% { opacity: 0; } }
-
-    /* FOOTER - EXACTLY FROM lol.html */
-    #footer {
-      position: fixed;
-      bottom: 20px;
-      text-align: center;
-      font-size: 11px;
-      opacity: 0.7;
-    }
-
-    #fog {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    #info img {
-      width: 18px;
-      height: auto;
-      vertical-align: middle;
-      margin-left: 6px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligence Console Output</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.5;
+            white-space: pre-wrap; /* Preserves formatting and line breaks */
+            word-wrap: break-word;
+        }
+        .console-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        a {
+            color: #58a6ff;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #8ab4f8;
+        }
+    </style>
 </head>
 <body>
 
-  <div id="background"></div>
+<div class="console-container" id="terminal"></div>
 
-  <div id="entry">
-    darkness.icu
-  </div>
+<script>
+// The raw log data formatted exactly like the script output
+const terminalOutput = `============================================================
+  TARGET GEOLOCATION & NETWORK INFO
+============================================================
 
-  <div id="payload" class="hidden">
-    <pre id="info"></pre>
-  </div>
+[-] Country               : United States of America
+[-] Region/State          : Georgia
+[-] City                  : Atlanta
+[-] ZIP/Postal Code       : 30383
+[-] Coordinates           : 33.7488, -84.38754
+[-] ISP                   : Comcast Cable Communications LLC
+[-] Domain Name           : comcast.net
+[-] Time Zone             : America/New_York
+[-] Elevation             : 307 meters
+[-] Atmospheric Pressure  : 977 hPa
 
-  <div id="footer">
-    © 2026 <span id="fog">6fog.lol</span>
-  </div>
+============================================================
+  GOOGLE PROFILE & LEAK INTELLIGENCE
+============================================================
 
-  <audio id="music" src="song.mp3" loop></audio>
+[-] Google ID           : 105235763434628474449
+[-] Google Maps Profile : https://www.google.com/maps/contrib/105235763434628474449/reviews
+[-] Connected Accounts  : Microsoft, Pinterest
 
-  <script>
-    const entry = document.getElementById("entry");
-    const payload = document.getElementById("payload");
-    const info = document.getElementById("info");
-    const music = document.getElementById("music");
-    const fog = document.getElementById("fog");
-    const bg = document.getElementById("background");
+[!] CRITICAL LEAK FOUND (Alien TxtBase 2025 Log collection):
+    Target Email        : johnphamm88@gmail.com
+    Plaintext Password  : Qwcvsht56 
+    Source URL          : idmsa.apple.com/appleauth/auth/authorize/signin
 
-    let started = false;
+============================================================
+  HISTORICAL DATA BREACH MATCHES
+============================================================
 
-    fog.onclick = (e) => {
-      e.stopPropagation();
-      window.location.href = "https://6fog.lol";
-    };
+[*] Breach Source: verifications.io
+    Name     : Christopher Rischar
+    Email    : topher.rischar@gmail.com
+    Phone    : 6784780096
+    Location : Conshohocken, PA (Postal: 98980)
+    Address  : streetvile
+    IP       : 73.7.92.134
 
-    function typeWriter(text, i = 0) {
-      if (i < text.length) {
-        info.textContent += text.charAt(i);
-        setTimeout(() => typeWriter(text, i + 1), 25);
-      }
+[*] Breach Source: apexsms.com
+    Name     : Adaun Aberamgamson
+    Phone    : 3604803529
+    Location : Olympia, WA (Postal: 98512)
+    Address  : 3843 Streetvile road
+
+[*] Breach Source: mortalonline.com
+    Name     : Chase Lindsay (Age: 57, DOB: 1968-07-08)
+    Username : Tahuch2000
+    Email    : tahucl2000@gmail.com
+    Location : Streetvile, Arizona, US (Postal: 78913)
+    Address  : afajkljf lane
+    IP       : 68.2.219.75
+    MD5 Hash : 7ec513e498e3bd1ae8af06f5c9519a7c
+
+============================================================
+  ASSOCIATED ALTERNATE ACCOUNTS (BEHAVIORAL)
+============================================================
+
+[-] Handle: @nahommecca     | ID: 3042523047     | Scan Date: 4/4/2026
+[-] Handle: @yourfeelingg   | ID: 1939285831     | Scan Date: 12/30/2025 (Updated 4/4/2026)
+[-] Handle: Lockz✟          | ID: 10054215994    | Scan Date: 12/5/2025
+
+============================================================
+  SAFETY SIGNALS & RISK INDICATORS
+============================================================
+
+[!] Safety Signal Rating : 100% (As of 5/7/2026)
+[!] Condo Activity Check : 95%
+    Detail: Discord user with linked Roblox account detected in 11+ condo server(s).
+    Associated Discord IDs:
+      -> 975427860288405526
+      -> 987147078339813446
+[!] Friend Network Status: 100% (User has flagged friends in network)
+
+============================================================
+
+[SUCCESS] Output complete.`;
+
+const terminalElement = document.getElementById('terminal');
+let index = 0;
+const delay = 3; // Adjust typing speed here (in milliseconds per character)
+
+function typeWriterEffect() {
+    if (index < terminalOutput.length) {
+        // Detects URLs in text chunks and keeps them clickable if necessary, 
+        // otherwise appends character by character.
+        terminalElement.textContent += terminalOutput.charAt(index);
+        index++;
+        setTimeout(typeWriterEffect, delay);
+    } else {
+        // After typing finishes, turn raw URL strings into functional hyperlinks
+        let content = terminalElement.innerHTML;
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        terminalElement.innerHTML = content.replace(urlRegex, function(url) {
+            return '<a href="' + url + '" target="_blank">' + url + '</a>';
+        });
     }
+}
 
-    document.body.onclick = async () => {
-      if (started) return;
-      started = true;
+// Initialize the typewriter script on window load
+window.onload = typeWriterEffect;
+</script>
 
-      bg.style.display = "block";
-      entry.classList.add("hidden");
-      payload.classList.remove("hidden");
-      
-      music.play().catch(() => console.log("Audio requires interaction."));
-
-      try {
-        const res = await fetch("https://ipapi.co/json/");
-        const data = await res.json();
-        
-        const now = new Date();
-        const time = now.toLocaleString("en-GB", { hour12: false });
-
-        const content = `Welcome To Darkness
--------- TIME -------
-${time}
-------- DEVICE & BROWSER -------
-${navigator.platform} & ${navigator.userAgent.split(") ")[0]})
-------- IPDATA -------
-IP Address: ${data.ip}
-Country: ${data.country_name}
-Location: ${data.city}, ${data.region}
-Provider: ${data.org}
-------- LOCATION -------
-Continent: ${data.continent_code}
-Postal Code: ${data.postal}
-Coordinates: ${data.latitude}, ${data.longitude}
-Timezone: ${data.timezone}
-Currency: ${data.currency}
-Language: ${navigator.language}
-------- SECURITY -------
-Tor: No
-Proxy: No
------ END -----`;
-
-        typeWriter(content);
-      } catch (error) {
-        const fallback = `ERROR: OFFLINE MODE\n------------------\nTIME: ${new Date().toLocaleString()}\nPLATFORM: ${navigator.platform}`;
-        typeWriter(fallback);
-      }
-    };
-  </script>
 </body>
-</html>
+</html>  
